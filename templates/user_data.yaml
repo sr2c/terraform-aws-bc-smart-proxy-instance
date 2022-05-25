@@ -1,0 +1,50 @@
+#cloud-config
+
+bootcmd:
+  - DEBIAN_FRONTEND=noninteractive apt-get -yq update
+  - DEBIAN_FRONTEND=noninteractive apt-get -yq install gnupg
+
+apt:
+  conf: |
+    APT {
+      Get {
+        Assume-Yes "true";
+        Fix-Broken "true";
+      };
+    };
+
+packages:
+  - awscli
+  - nginx
+  - libnginx-mod-http-subs-filter
+  - unattended-upgrades
+package_upgrade: true
+
+runcmd:
+  - echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
+  - DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
+  - sysctl -p /etc/sysctl.d/50-tcp_bbr.conf
+
+write_files:
+  - content: ${configure_script}
+    path: /root/configure.sh
+    owner: root:root
+    permissions: '0644'
+  - content: ${crontab}
+    path: /etc/cron.d/smart_proxy
+    owner: root:root
+    permissions: '0644'
+  - content: ${private_key}
+    path: /etc/ssl/private/smart_proxy.key
+    owner: root:root
+    permissions: '0600'
+  - content: ${certificate}
+    path: /etc/ssl/smart_proxy.crt
+    owner: root:root
+    permissions: '0644'
+  - content: |
+      net.core.default_qdisc=fq
+      net.ipv4.tcp_congestion_control=bbr
+    path: /etc/sysctl.d/50-tcp_bbr.conf
+    owner: root:root
+    permissions: '0644'
