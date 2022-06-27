@@ -10,7 +10,7 @@ variable "domain_name" {
 
 variable "max_transfer_per_hour" {
   type = string
-  default = "2147483648"
+  default = "6442450944"
   description = "The maximum number of bytes that can be sent out per hour."
 }
 
