@@ -17,6 +17,7 @@ packages:
   - awscli
   - nginx
   - libnginx-mod-http-subs-filter
+  - libnginx-mod-http-geoip2
   - unattended-upgrades
 package_upgrade: true
 
