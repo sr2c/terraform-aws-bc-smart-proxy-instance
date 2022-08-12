@@ -25,3 +25,11 @@ variable "rfc2136_tsig_secret" {
 variable "rfc2136_nameserver" {
   type = string
 }
+
+variable "maxmind_account_id" {
+  type = string
+}
+
+variable "maxmind_license_key" {
+  type = string
+}

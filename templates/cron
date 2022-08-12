@@ -1,1 +1,2 @@
 */2 * * * * root /bin/bash /root/configure.sh &>/dev/null
+13 13 * * * root geoipupdate &>/dev/null

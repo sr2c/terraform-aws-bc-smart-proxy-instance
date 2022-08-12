@@ -4,4 +4,4 @@ set -e
 
 aws s3 cp s3://${bucket_name}/default /etc/nginx/sites-enabled/default
 
-systemctl reload nginx
+systemctl reload-or-restart nginx

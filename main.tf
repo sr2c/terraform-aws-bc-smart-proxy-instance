@@ -9,7 +9,11 @@ data "cloudinit_config" "this" {
         { bucket_name = module.configuration_bucket.bucket_id })),
       crontab = jsonencode(file("${path.module}/templates/cron")),
       certificate = jsonencode("${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}"),
-      private_key = jsonencode(tls_private_key.cert_private_key.private_key_pem)
+      private_key = jsonencode(tls_private_key.cert_private_key.private_key_pem),
+      geoipconf   = jsonencode(templatefile("${path.module}/templates/GeoIP.conf",
+        { maxmind_license_key = var.maxmind_license_key,
+          maxmind_account_id = var.maxmind_account_id }
+      ))
     })
     content_type = "text/cloud-config"
     filename     = "user_data.yaml"
