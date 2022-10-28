@@ -29,6 +29,8 @@ resource "acme_certificate" "certificate" {
       RFC2136_NAMESERVER = var.rfc2136_nameserver
       RFC2136_TSIG_KEY = var.rfc2136_tsig_key
       RFC2136_TSIG_SECRET = var.rfc2136_tsig_secret
+      RFC2136_POLLING_INTERVAL = 60
+      RFC2136_PROPAGATION_TIMEOUT = 360
     }
   }
 }
