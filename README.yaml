@@ -1,0 +1,21 @@
+---
+name: terraform-aws-bc-smart-proxy-instance
+tags:
+  - aws
+  - terraform
+  - ec2
+  - bypass-censorship
+  - web-mirrors
+categories:
+  - terraform-modules/supported
+license: BSD2
+gitlab_repo: sr2c/terraform-aws-bc-smart-proxy-instance
+description: |-
+  Terraform module to deploy a Bypass Censorship Smart Proxy Instance in AWS.
+include:
+  - docs/terraform.md
+  - docs/targets.md
+contributors:
+  - name: irl
+    gitlab: irlxyz
+    gitlab_id: 5895869
