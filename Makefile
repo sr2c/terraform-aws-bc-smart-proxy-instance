@@ -10,4 +10,4 @@ export README_DEPS ?= docs/targets.md docs/terraform.md
 
 ## Lint terraform code
 lint:
-	$(SELF) terraform/install terraform/get-modules terraform/lint
+	$(SELF) terraform/install terraform/get-modules terraform/lint terraform/validate
