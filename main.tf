@@ -1,4 +1,10 @@
 
+module "conf_log" {
+  source              = "sr2c/ec2-conf-log/aws"
+  context             = module.this.context
+  disable_logs_bucket = true
+}
+
 data "cloudinit_config" "this" {
   base64_encode = true
   gzip          = true
@@ -6,7 +12,7 @@ data "cloudinit_config" "this" {
   part {
     content = templatefile("${path.module}/templates/user_data.yaml", {
       configure_script = jsonencode(templatefile("${path.module}/templates/configure.sh",
-      { bucket_name = module.configuration_bucket.bucket_id })),
+      { bucket_name = module.conf_log.conf_bucket_id })),
       crontab     = jsonencode(file("${path.module}/templates/cron")),
       certificate = jsonencode("${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}"),
       private_key = jsonencode(tls_private_key.cert_private_key.private_key_pem)
@@ -57,7 +63,7 @@ module "instance" {
   associate_public_ip_address = true
   disable_api_termination     = var.disable_api_termination
   instance_type               = "t3.medium"
-  instance_profile            = aws_iam_instance_profile.smart_proxy.name
+  instance_profile            = module.conf_log.conf_bucket_id
   user_data_base64            = data.cloudinit_config.this.rendered
   security_group_rules = [
     {
