@@ -10,7 +10,7 @@ module "configuration_bucket" {
 
 data "aws_iam_policy_document" "read_configuration" {
   statement {
-    effect  = "Allow"
+    effect = "Allow"
     actions = [
       "s3:GetObject"
     ]

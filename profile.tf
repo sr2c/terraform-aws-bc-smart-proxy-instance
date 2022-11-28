@@ -9,7 +9,7 @@ module "instance_profile_label" {
 
 data "aws_iam_policy_document" "assume_policy" {
   statement {
-    effect  = "Allow"
+    effect = "Allow"
     actions = [
       "sts:AssumeRole"
     ]
