@@ -6,14 +6,10 @@ data "cloudinit_config" "this" {
   part {
     content = templatefile("${path.module}/templates/user_data.yaml", {
       configure_script = jsonencode(templatefile("${path.module}/templates/configure.sh",
-        { bucket_name = module.configuration_bucket.bucket_id })),
-      crontab = jsonencode(file("${path.module}/templates/cron")),
+      { bucket_name = module.configuration_bucket.bucket_id })),
+      crontab     = jsonencode(file("${path.module}/templates/cron")),
       certificate = jsonencode("${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}"),
-      private_key = jsonencode(tls_private_key.cert_private_key.private_key_pem),
-      geoipconf   = jsonencode(templatefile("${path.module}/templates/GeoIP.conf",
-        { maxmind_license_key = var.maxmind_license_key,
-          maxmind_account_id = var.maxmind_account_id }
-      ))
+      private_key = jsonencode(tls_private_key.cert_private_key.private_key_pem)
     })
     content_type = "text/cloud-config"
     filename     = "user_data.yaml"
@@ -30,7 +26,7 @@ data "aws_vpc" "default" {
 
 data "aws_subnet" "default" {
   availability_zone = data.aws_availability_zones.available.names[0]
-  default_for_az = true
+  default_for_az    = true
 }
 
 data "aws_ami" "ubuntu" {
@@ -50,8 +46,8 @@ data "aws_ami" "ubuntu" {
 }
 
 module "instance" {
-  source                      = "cloudposse/ec2-instance/aws"
-  version                     = "0.42.0"
+  source  = "cloudposse/ec2-instance/aws"
+  version = "0.42.0"
 
   subnet                      = data.aws_subnet.default.id
   vpc_id                      = data.aws_vpc.default.id
@@ -63,27 +59,27 @@ module "instance" {
   instance_type               = "t3.medium"
   instance_profile            = aws_iam_instance_profile.smart_proxy.name
   user_data_base64            = data.cloudinit_config.this.rendered
-  security_group_rules        = [
+  security_group_rules = [
     {
-      "cidr_blocks": [ "0.0.0.0/0" ],
-      "description": "Allow all outbound traffic",
-      "from_port": 0, "protocol": "-1", "to_port": 65535,
-      "type": "egress"
+      "cidr_blocks" : ["0.0.0.0/0"],
+      "description" : "Allow all outbound traffic",
+      "from_port" : 0, "protocol" : "-1", "to_port" : 65535,
+      "type" : "egress"
     },
     {
-      "cidr_blocks": [ "0.0.0.0/0" ],
-      "description": "Allow all inbound HTTP traffic",
-      "from_port": 80, "protocol": "tcp", "to_port": 80,
-      "type": "ingress"
+      "cidr_blocks" : ["0.0.0.0/0"],
+      "description" : "Allow all inbound HTTP traffic",
+      "from_port" : 80, "protocol" : "tcp", "to_port" : 80,
+      "type" : "ingress"
     },
     {
-      "cidr_blocks": [ "0.0.0.0/0" ],
-      "description": "Allow all inbound HTTPS traffic",
-      "from_port": 443, "protocol": "tcp", "to_port": 443,
-      "type": "ingress"
+      "cidr_blocks" : ["0.0.0.0/0"],
+      "description" : "Allow all inbound HTTPS traffic",
+      "from_port" : 443, "protocol" : "tcp", "to_port" : 443,
+      "type" : "ingress"
     }
   ]
 
-  context                     = module.this.context
-  tags                        = { Application = "smart-proxy" }
+  context = module.this.context
+  tags    = { Application = "smart-proxy" }
 }

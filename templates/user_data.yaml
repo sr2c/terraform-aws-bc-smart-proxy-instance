@@ -17,7 +17,6 @@ packages:
   - awscli
   - nginx
   - libnginx-mod-http-subs-filter
-  - libnginx-mod-http-geoip2
   - unattended-upgrades
 package_upgrade: true
 
@@ -25,8 +24,6 @@ runcmd:
   - echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
   - DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
   - sysctl -p /etc/sysctl.d/50-tcp_bbr.conf
-  - wget -O /tmp/geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v4.9.0/geoipupdate_4.9.0_linux_amd64.deb
-  - dpkg -i /tmp/geoipupdate.deb
 
 write_files:
   - content: ${configure_script}
@@ -49,9 +46,5 @@ write_files:
       net.core.default_qdisc=fq
       net.ipv4.tcp_congestion_control=bbr
     path: /etc/sysctl.d/50-tcp_bbr.conf
-    owner: root:root
-    permissions: '0644'
-  - content: ${geoipconf}
-    path: /etc/GeoIP.conf
     owner: root:root
     permissions: '0644'
