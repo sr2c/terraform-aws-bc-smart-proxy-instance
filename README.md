@@ -59,7 +59,12 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 <!-- markdownlint-disable -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_acme"></a> [acme](#requirement\_acme) | >= 2.11.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.41.0 |
+| <a name="requirement_cloudinit"></a> [cloudinit](#requirement\_cloudinit) | >= 2.2.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 4.0.4 |
 
 ## Providers
 
