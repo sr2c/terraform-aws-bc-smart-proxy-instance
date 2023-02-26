@@ -1,3 +1,0 @@
-[submodule "build-harness-extensions"]
-	path = build-harness-extensions
-	url = https://gitlab.com/sr2c/build-harness-extensions.git

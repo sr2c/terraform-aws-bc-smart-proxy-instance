@@ -1,0 +1,11 @@
+image: python:3.10-bullseye
+
+stages:
+  - test
+
+test:lint:
+  stage: test
+  script:
+    - make init
+    - make git/submodules-update  ## Requires init before target available
+    - make lint                   ## Run Terraform linters and validation

@@ -12,9 +12,9 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_acme"></a> [acme](#provider\_acme) | 2.11.1 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.41.0 |
-| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | 2.2.0 |
+| <a name="provider_acme"></a> [acme](#provider\_acme) | 2.13.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.56.0 |
+| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | 2.3.2 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules

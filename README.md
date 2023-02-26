@@ -70,9 +70,9 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 
 | Name | Version |
 |------|---------|
-| <a name="provider_acme"></a> [acme](#provider\_acme) | 2.11.1 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.41.0 |
-| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | 2.2.0 |
+| <a name="provider_acme"></a> [acme](#provider\_acme) | 2.13.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.56.0 |
+| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | 2.3.2 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
@@ -189,7 +189,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2021-2022 SR2 Communications Limited
+Copyright © 2021-2023 SR2 Communications Limited
 
 
 
@@ -236,16 +236,51 @@ This project is maintained by [SR2 Communications Limited][website].
 
 [![SR2 Communications Limited][logo]][website]
 
-We're a [DevOps Professional Services][website] company based in Aberdeen, Scotland. We ❤️  open source software and
+We're a [DevOps services][website] company based in Aberdeen, Scotland. We ❤️ open source software and
 specialise in digital human rights and humanitarian projects.
 
 We offer [paid support][website] on all of our projects.
 
 Check out [our other projects][gitlab], or [hire us][website] to get support with using our projects.
 
+## Trans Rights
+
+![Trans Rights Are Human Rights][trans_rights]
+
+Trans is an umbrella term to describe people whose gender is not the same as, or does not sit comfortably with, the
+sex they were assigned at birth. *Like all people*, they have the right to be treated with dignity and respect and to
+have their human rights protected.
+
+Transgender people face significant discrimination and prejudice in many areas of their lives, including employment,
+education, housing, and healthcare. They are also at increased risk of violence and hate crimes. These issues
+can have a serious impact on the physical and mental well-being of transgender people and can prevent them from fully
+participating in society.
+
+Transgender rights are therefore an important part of the broader struggle for human rights. Everyone, regardless of
+their gender identity, should be able to live their lives free from discrimination and to enjoy the same rights and
+opportunities as everyone else. This includes the right to express their gender identity and to be treated with respect
+and dignity.
+
+It is important for society to recognize and respect the rights of transgender people, and to take steps to address the
+discrimination and prejudice that they face. This can include supporting policies and laws that protect transgender
+people from discrimination and promoting acceptance and understanding of transgender people within the broader
+community.
+
+* [Gendered Intelligence](https://genderedintelligence.co.uk/) is a trans-led and trans-involving grassroots organisation
+  with a wealth of lived experience, community connections of many kinds, and a depth and breadth of trans community
+  knowledge. They offer staff training, consultancy, youth work, mentoring and undertake public engagement activities.
+
+* [TransAid Cymru](https://transaid.cymru/) began life as a local mutual aid group in Cardiff. Tired of the ways that the
+  electoral political system had let the trans community down, they decided it was time to do something for themselves.
+  Many of the founding members were disabled and unemployed. Familiar with the real, material needs of the trans
+  community and how little support there was out there, they founded the mutual aid group in order to provide the services
+  the trans community needed.
+
+If you have the means and you have benefited from this open source project, please consider making a donation to either
+(or both) of the above groups.
 
 
-### Contributors
+## Contributors
 
 <!-- markdownlint-disable -->
 |  [![irl][irlxyz_avatar]][irlxyz_homepage]<br/>[irl][irlxyz_homepage] |
@@ -267,4 +302,5 @@ Check out [our other projects][gitlab], or [hire us][website] to get support wit
   [readme_header_link]: https://www.sr2.uk/?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/terraform-aws-bc-smart-proxy-instance&utm_content=readme_header_link
   [readme_commercial_support_img]: https://www.sr2.uk/readme/paid-support.png
   [readme_commercial_support_link]: https://www.sr2.uk/?utm_source=gitlab&utm_medium=readme&utm_campaign=sr2c/terraform-aws-bc-smart-proxy-instance&utm_content=readme_commercial_support_link
+  [trans_rights]: https://img.shields.io/badge/Trans%20Rights-Human%20Rights-lightblue?logo=data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADVJREFUeNpijD73i4EUwMRAIiBZA+PXlTsGm5P+//8/yJzE8m3VzkHmJNL9kKbqNMicBBBgAM3lCr5JiK9jAAAAAElFTkSuQmCC
 <!-- markdownlint-restore -->
