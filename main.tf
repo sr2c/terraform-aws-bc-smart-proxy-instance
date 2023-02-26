@@ -64,7 +64,7 @@ module "instance" {
   associate_public_ip_address = true
   disable_api_termination     = var.disable_api_termination
   instance_type               = "t3.medium"
-  instance_profile            = module.conf_log.conf_bucket_id
+  instance_profile            = module.conf_log.instance_profile_name
   user_data_base64            = data.cloudinit_config.this.rendered
   security_group_rules = [
     {
