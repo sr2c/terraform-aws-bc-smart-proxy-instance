@@ -1,6 +1,7 @@
 
 module "conf_log" {
   source              = "sr2c/ec2-conf-log/aws"
+  version             = "0.0.3"
   context             = module.this.context
   disable_logs_bucket = true
 }

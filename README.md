@@ -61,6 +61,7 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_acme"></a> [acme](#requirement\_acme) | >= 2.11.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.41.0 |
 | <a name="requirement_cloudinit"></a> [cloudinit](#requirement\_cloudinit) | >= 2.2.0 |
@@ -79,7 +80,7 @@ It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_conf_log"></a> [conf\_log](#module\_conf\_log) | sr2c/ec2-conf-log/aws | n/a |
+| <a name="module_conf_log"></a> [conf\_log](#module\_conf\_log) | sr2c/ec2-conf-log/aws | 0.0.3 |
 | <a name="module_instance"></a> [instance](#module\_instance) | cloudposse/ec2-instance/aws | 0.42.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 

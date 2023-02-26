@@ -1,7 +1,6 @@
 SHELL := /bin/bash
 
 export HELP_FILTER ?= help|terraform|lint
-export README_TEMPLATE_FILE ?= build-harness-extensions/templates/README.md.gotmpl
 
 # List of targets the `readme` target should call before generating the readme
 export README_DEPS ?= docs/targets.md docs/terraform.md
