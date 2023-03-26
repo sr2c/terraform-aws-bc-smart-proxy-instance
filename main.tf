@@ -104,7 +104,7 @@ data "aws_route53_zone" "this" {
 
 resource "aws_route53_record" "this" {
   zone_id = data.aws_route53_zone.this.id
-  name    = "*.${module.this.id}"
+  name    = "*.smart"
   type    = "A"
   ttl     = 180
 
@@ -154,7 +154,7 @@ resource "aws_iam_policy" "dns_validation" {
         Condition = {
           "ForAllValues:StringEquals" = {
             "route53:ChangeResourceRecordSetsNormalizedRecordNames" = [
-              "_acme-challenge.${module.this.id}.${local.trimmed_dns_zone}"
+              "_acme-challenge.smart.${local.trimmed_dns_zone}"
             ]
             "route53:ChangeResourceRecordSetsRecordTypes" : [
               "TXT"
@@ -194,10 +194,10 @@ resource "tls_private_key" "cert_private_key" {
 
 resource "tls_cert_request" "req" {
   private_key_pem = tls_private_key.cert_private_key.private_key_pem
-  dns_names       = ["*.${module.this.id}.${local.trimmed_dns_zone}"]
+  dns_names       = ["*.smart.${local.trimmed_dns_zone}"]
 
   subject {
-    common_name = "*.${module.this.id}.${local.trimmed_dns_zone}"
+    common_name = "*.smart.${local.trimmed_dns_zone}"
   }
 }
 
