@@ -12,8 +12,10 @@ license: BSD2
 gitlab_repo: sr2c/terraform-aws-bc-smart-proxy-instance
 description: |-
   Terraform module to deploy a Bypass Censorship Smart Proxy Instance in AWS.
+  
+  ![Architecture diagram](./docs/terraform-aws-bc-smart-proxy-instance.png)
 include:
-  - docs/terraform.md
+  - docs/terraform-split.md
   - docs/targets.md
 contributors:
   - name: irl
