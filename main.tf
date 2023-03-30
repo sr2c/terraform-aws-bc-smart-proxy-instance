@@ -203,9 +203,16 @@ resource "tls_cert_request" "req" {
 
 resource "time_sleep" "wait_for_iam_propagation" {
   # Errors can occur trying to use the IAM user immediately after creation, giving it 20 seconds
-  # should be sufficient.
+  # should be sufficient. Re-run the creation delay if any of the IAM resources change.
 
   depends_on = [aws_iam_access_key.dns_validation]
+
+  triggers = {
+    iam_policy_attachment = aws_iam_user_policy_attachment.dns_validation.id
+    iam_policy            = aws_iam_policy.dns_validation.policy
+    iam_user              = aws_iam_user.dns_validation.id
+    iam_access_key        = aws_iam_access_key.dns_validation.id
+  }
 
   create_duration = "20s"
 }
