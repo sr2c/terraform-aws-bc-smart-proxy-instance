@@ -1,11 +1,11 @@
 locals {
   trimmed_dns_zone = trimsuffix(var.dns_zone, ".")
-  group_name = coalesce(module.this.tenant, "default")
+  group_name       = coalesce(module.this.tenant, "default")
 }
 
 module "conf_log" {
   source              = "sr2c/ec2-conf-log/aws"
-  version             = "0.0.3"
+  version             = "0.0.4"
   context             = module.this.context
   disable_logs_bucket = true
 }
