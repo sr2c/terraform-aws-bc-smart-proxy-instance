@@ -3,6 +3,15 @@ locals {
   group_name       = coalesce(module.this.tenant, "default")
 }
 
+resource "tls_private_key" "provisioner_ssh" {
+  algorithm = "RSA"
+}
+
+resource "aws_key_pair" "provisioner" {
+  key_name   = module.this.id
+  public_key = tls_private_key.provisioner_ssh.public_key_openssh
+}
+
 module "conf_log" {
   source              = "sr2c/ec2-conf-log/aws"
   version             = "0.0.4"
@@ -56,47 +65,65 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-module "instance" {
-  source  = "cloudposse/ec2-instance/aws"
-  version = "0.42.0"
+resource "aws_security_group" "instance" {
+  name        = module.this.id
+  description = "Smart proxy security group for ${module.this.id}"
+  vpc_id      = data.aws_vpc.default.id
 
-  subnet                      = data.aws_subnet.default.id
-  vpc_id                      = data.aws_vpc.default.id
-  ami                         = data.aws_ami.ubuntu.id
-  ami_owner                   = "099720109477"
-  assign_eip_address          = true
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # -1 means all protocols
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # -1 means all protocols
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_eip" "this" {
+  instance = aws_instance.this.id
+}
+
+resource "aws_instance" "this" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.medium"
+
+  subnet_id = data.aws_subnet.default.id
+
   associate_public_ip_address = true
   disable_api_termination     = var.disable_api_termination
-  instance_type               = "t3.medium"
-  instance_profile            = module.conf_log.instance_profile_name
-  user_data_base64            = data.cloudinit_config.this.rendered
-  security_group_rules = [
-    {
-      "cidr_blocks" : ["0.0.0.0/0"],
-      "description" : "Allow all outbound traffic",
-      "from_port" : 0, "protocol" : "-1", "to_port" : 65535,
-      "type" : "egress"
-    },
-    {
-      "cidr_blocks" : ["0.0.0.0/0"],
-      "description" : "Allow all inbound HTTP traffic",
-      "from_port" : 80, "protocol" : "tcp", "to_port" : 80,
-      "type" : "ingress"
-    },
-    {
-      "cidr_blocks" : ["0.0.0.0/0"],
-      "description" : "Allow all inbound HTTPS traffic",
-      "from_port" : 443, "protocol" : "tcp", "to_port" : 443,
-      "type" : "ingress"
-    }
+
+  key_name             = module.this.id
+  iam_instance_profile = module.conf_log.instance_profile_name
+  user_data_base64     = data.cloudinit_config.this.rendered
+
+  security_groups = [
+    aws_security_group.instance.id
   ]
 
-  context = module.this.context
-  tags    = { Application = "smart-proxy" }
+  provisioner "remote-exec" {
+    inline = [
+      "cloud-init status --wait",
+      "sleep 30" # Give tor and obfs4proxy time to generate keys and state
+    ]
+  }
 
-  depends_on = [
-    aws_s3_object.smart_config,
-  ]
+  connection {
+    host        = aws_instance.this.public_ip
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = tls_private_key.provisioner_ssh.private_key_openssh
+    timeout     = "5m"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 data "aws_route53_zone" "this" {
@@ -110,7 +137,7 @@ resource "aws_route53_record" "this" {
   ttl     = 180
 
   records = [
-    module.instance.public_ip
+    aws_eip.this.public_ip
   ]
 }
 

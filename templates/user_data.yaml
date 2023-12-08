@@ -24,6 +24,7 @@ runcmd:
   - echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
   - DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
   - sysctl -p /etc/sysctl.d/50-tcp_bbr.conf
+  - bash /root/configure.sh
 
 write_files:
   - content: ${configure_script}

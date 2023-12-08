@@ -10,7 +10,7 @@ resource "aws_cloudwatch_metric_alarm" "high_bandwidth" {
   alarm_description   = "Alerts when bandwidth out exceeds specified threshold in an hour"
   actions_enabled     = "true"
   dimensions = {
-    InstanceId = module.instance.id
+    InstanceId = aws_instance.this.id
   }
 
   tags = module.this.tags
@@ -28,7 +28,7 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu" {
   alarm_description   = "Alerts when bandwidth out exceeds specified threshold in an hour"
   actions_enabled     = "true"
   dimensions = {
-    InstanceId = module.instance.id
+    InstanceId = aws_instance.this.id
   }
 
   tags = module.this.tags

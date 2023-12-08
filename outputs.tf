@@ -5,5 +5,5 @@ output "config_bucket_name" {
 
 output "ip_addresses" {
   description = "The public IP addresses of the smart proxy instance."
-  value       = [module.instance.public_ip]
+  value       = [aws_eip.this.public_ip]
 }
