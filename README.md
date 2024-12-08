@@ -29,7 +29,9 @@ Terraform module to deploy a Bypass Censorship Smart Proxy Instance in AWS.
 ![Architecture diagram](./docs/terraform-aws-bc-smart-proxy-instance.png)
 
 ---
-It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).<!-- markdownlint-disable -->
+It's 100% Open Source and licensed under the [BSD 2-clause License](LICENSE).
+
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -132,6 +134,8 @@ these inputs have been seperated here to make it clearer which inputs are specif
 | <a name="output_config_bucket_name"></a> [config\_bucket\_name](#output\_config\_bucket\_name) | The name of the S3 bucket used to update the configuration for the smart proxy instance. |
 | <a name="output_ip_addresses"></a> [ip\_addresses](#output\_ip\_addresses) | The public IP addresses of the smart proxy instance. |
 <!-- markdownlint-restore -->
+
+
 <!-- markdownlint-disable -->
 ## Makefile Targets
 ```text
@@ -144,6 +148,7 @@ Available targets:
 
 ```
 <!-- markdownlint-restore -->
+
 ## Share the Love
 
 Like this project? Please give it a ★ on
